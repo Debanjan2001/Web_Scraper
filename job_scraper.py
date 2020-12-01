@@ -2,12 +2,12 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
-print(f"\nWelcome to this program. It will pick up some jobs from timesjobs.com which were posted recently and dont require a skillset that you dont have :-)\n")
-print('It also refreshes  itself every 10 minutes(which is actually illogical). I am a dumb programmer. Please bear with me.\n')
+print(f"\nWelcome to this program. It will pick up some jobs from timesjobs.com which were posted recently and don't require a skillset that you dont have :-)\n")
+print('It also refreshes  itself every 10 seconds(which is actually illogical).But anyways, its for learning purposes.\n')
 
 print('Type some skill that you are not familiar with (eg.-django)')
-unfamiliar_skill = input('>')
-print(f'Filtering out {unfamiliar_skill}')
+unknown_skill = input('>')
+print(f'Filtering out {unknown_skill}')
 
 def find_jobs():
     html_text = requests.get('https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords=python&txtLocation=').text
@@ -26,7 +26,7 @@ def find_jobs():
 
             more_info = job.header.h2.a['href']
 
-            if unfamiliar_skill not in skills:
+            if unknown_skill not in skills:
 
                 with open(f'posts/{index}.txt','w') as f:
                     # print(f"Company Name:  {company_name.strip()}")
@@ -43,5 +43,5 @@ if __name__ == '__main__':
     while True:
         find_jobs()
         time_to_wait = 10
-        print(f'Waiting for {time_to_wait} minutes...')
-        time.sleep(time_to_wait * 60) #10 minutes
+        print(f'Waiting for {time_to_wait} seconds...')
+        time.sleep(time_to_wait)
